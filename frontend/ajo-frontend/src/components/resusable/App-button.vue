@@ -1,11 +1,13 @@
 <template>
   <div>
-    <v-btn :loading="loading"
+    <v-btn
+        elevation="0"
+        :loading="loading"
            :width="width"
            :height="height"
            :disabled="disabled"
            @click="$emit('click')"
-           color="primary"
+           color="#03a84e"
     >{{text}} </v-btn>
   </div>
 

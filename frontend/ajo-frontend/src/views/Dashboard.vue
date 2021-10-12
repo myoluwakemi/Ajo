@@ -1,22 +1,22 @@
 <template>
 <div>
-  <dashboard-layout>
-    <template #side-nav>
-      <DashboardSideNav/>
+  <Header/>
+  <DashboardLayout>
+    <template v-slot:mainContent>
+      <DashboardHome/>
     </template>
-    <template #main-content>
-     <router-view/>
-    </template>
-  </dashboard-layout>
+
+  </DashboardLayout>
 </div>
 </template>
 
 <script>
 import DashboardLayout from "../components/resusable/DashboardLayout";
-import DashboardSideNav from "../components/resusable/DashboardSideNav";
+import Header from "../components/resusable/Header";
+import DashboardHome from "../components/DashboardHome";
 export default {
   name: "Dashboard",
-  components: {DashboardSideNav, DashboardLayout}
+  components: {DashboardHome, Header,  DashboardLayout}
 }
 </script>
 

@@ -32,6 +32,11 @@ const routes = [
       }
     ]
 
+  },
+  {
+    path: '/branch/:id',
+    name:'Branch',
+    component: ()=> import('../views/BranchDetails')
   }
 
 ]

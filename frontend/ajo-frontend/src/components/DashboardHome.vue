@@ -7,12 +7,16 @@
       single-line
       hide-details
   ></v-text-field>
+  <div class="card-table">
     <v-data-table
+        items-per-page="5"
+        height="50vh"
         :headers="headers"
         :search="search"
         :items="desserts"
         sort-by="calories"
         class="elevation-1"
+        @click:row="gotoBranch"
     >
       <template v-slot:top>
         <v-toolbar
@@ -31,7 +35,7 @@
           >
             <template v-slot:activator="{ on, attrs }">
               <v-btn
-                  color="primary"
+                  color="#03a84e"
                   dark
                   class="mb-2"
                   v-bind="attrs"
@@ -55,8 +59,9 @@
                         md="4"
                     >
                       <v-text-field
+                          color="#03a84e"
                           v-model="editedItem.name"
-                          label="Dessert name"
+                          label="Branch Name"
                       ></v-text-field>
                     </v-col>
                     <v-col
@@ -66,7 +71,8 @@
                     >
                       <v-text-field
                           v-model="editedItem.calories"
-                          label="Calories"
+                          label="Weekly savings"
+                          color="#03a84e"
                       ></v-text-field>
                     </v-col>
                     <v-col
@@ -76,7 +82,8 @@
                     >
                       <v-text-field
                           v-model="editedItem.fat"
-                          label="Fat (g)"
+                          label="Monthly saving"
+                          color="#03a84e"
                       ></v-text-field>
                     </v-col>
                     <v-col
@@ -85,8 +92,9 @@
                         md="4"
                     >
                       <v-text-field
+                          color="#03a84e"
                           v-model="editedItem.carbs"
-                          label="Carbs (g)"
+                          label="d/l"
                       ></v-text-field>
                     </v-col>
                     <v-col
@@ -95,8 +103,9 @@
                         md="4"
                     >
                       <v-text-field
+                          color="#03a84e"
                           v-model="editedItem.protein"
-                          label="Protein (g)"
+                          label="b/l"
                       ></v-text-field>
                     </v-col>
                   </v-row>
@@ -106,14 +115,14 @@
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn
-                    color="blue darken-1"
+                    color="#03a84e"
                     text
                     @click="close"
                 >
                   Cancel
                 </v-btn>
                 <v-btn
-                    color="blue darken-1"
+                    color="#03a84e"
                     text
                     @click="save"
                 >
@@ -127,8 +136,8 @@
               <v-card-title class="text-h5">Are you sure you want to delete this item?</v-card-title>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
-                <v-btn color="blue darken-1" text @click="deleteItemConfirm">OK</v-btn>
+                <v-btn  color="#03a84e" text @click="closeDelete">Cancel</v-btn>
+                <v-btn  color="#03a84e" text @click="deleteItemConfirm">OK</v-btn>
                 <v-spacer></v-spacer>
               </v-card-actions>
             </v-card>
@@ -138,12 +147,14 @@
       <template v-slot:item.actions="{ item }">
         <v-icon
             small
+            color="#03a84e"
             class="mr-2"
             @click="editItem(item)"
         >
           mdi-pencil
         </v-icon>
         <v-icon
+            color="#03a84e"
             small
             @click="deleteItem(item)"
         >
@@ -159,6 +170,7 @@
         </v-btn>
       </template>
     </v-data-table>
+  </div>
 </div>
 </template>
 
@@ -166,6 +178,7 @@
 export default {
   name: "DashboardHome",
   data: () => ({
+    id: 1,
     search: "",
     dialog: false,
     dialogDelete: false,
@@ -220,6 +233,9 @@ export default {
   },
 
   methods: {
+    gotoBranch(){
+      this.$router.push("/branch/" + this.id);
+    },
     initialize() {
       this.desserts = [
         {

@@ -3,18 +3,20 @@
     <h3>LOGIN</h3>
     <div class="mt-6">
       <h5 class="email">Email Address</h5>
-      <v-text-field placeholder="Enter your email address" type="email" />
+      <v-text-field color="#03a84e" placeholder="Enter your email address" type="email" />
     </div>
     <div>
       <h5 class="password">Password</h5>
-      <v-text-field placeholder="Enter your password"
+      <v-text-field
+          color="#03a84e"
+          placeholder="Enter your password"
                     :append-icon="value ? 'mdi-eye' : 'mdi-eye-off'"
                     @click:append="() => (value = !value)"
                     :type="value ? 'text' : 'password'"
                     id="password"/>
 
     </div>
-    <AppButton text="Submit"/>
+    <AppButton text="Submit" @click="gotoDashboard"/>
 
 
 
@@ -29,6 +31,12 @@
     data: ()=>{
       return{
         value: false
+      }
+    },
+
+    methods:{
+      gotoDashboard(){
+        this.$router.push('/dashboard');
       }
     }
   }
